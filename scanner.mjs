@@ -15,15 +15,15 @@ export function setupScanner({ container, errorCallback, readyCallback, detectio
         // Enable detection of different formats
         decoder: {
             readers: [  // Define the formats that we want the scanner to recognize
-                "code_128_reader",
                 "ean_reader",
                 "ean_8_reader",
-                "upc_reader",
-                "upc_e_reader",
-                "code_39_reader",
-                "i2of5_reader",
-                "2of5_reader",
-                "codabar_reader"
+                // "code_128_reader",
+                // "upc_reader",
+                // "upc_e_reader",
+                // "code_39_reader",
+                // "i2of5_reader",
+                // "2of5_reader",
+                // "codabar_reader"
             ]
         }
     }, function (err) {
