@@ -2,6 +2,14 @@
 
 This tool allows a programmer to implement a barcode scanner in his project
 
+> ⚠️ **Submodules Alert!**
+>
+> This repo used submodules. To clone the repo with the submodules, use the following command:
+>
+> ```bash
+> git clone --recurse-submodules https://github.com/PortiESP/supermarkets-barcode-scanner.git
+> ```
+
 ## How to use
 
 ```js
