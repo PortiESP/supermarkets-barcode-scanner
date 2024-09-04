@@ -3,7 +3,7 @@ import { queryBarcode } from './supermarkets-barcodes-api-proxy/modules/proxy'
 
 let lastDetectionTimestamp = 0
 
-export function setupScanner({ container, readyCallback, detectionCallback, debounce }) {
+export function setupScanner({ container, errorCallback, readyCallback, detectionCallback, detectionOptions }) {
     // Setup of the barcode scanner
     Quagga.init({
         // Set the device camera as the source of images
@@ -28,14 +28,16 @@ export function setupScanner({ container, readyCallback, detectionCallback, debo
         }
     }, function (err) {
         // If there was an error during setup
-        if (err) return console.err(err)
+        if (err) {
+            if (errorCallback) errorCallback()
+            return console.error("[!] Error setting up the barcode scanner")
+        }
 
-        // If the setup was successful
-        Quagga.start()
         // Custom callback
         if (readyCallback) readyCallback()
     })
 
+    const { fetchBarcode, debounce } = detectionOptions
     Quagga.onDetected(async data => {
         // Prevent multiple calls to the callback for the same code
         if (debounce){
@@ -45,12 +47,15 @@ export function setupScanner({ container, readyCallback, detectionCallback, debo
             lastDetectionTimestamp = now
         }
 
-        await queryBarcode(data)
+
+        let result = undefined
+        if (fetchBarcode) result = await queryBarcode(data.codeResult.code, data.codeResult.format)
 
         // Custom callback
-        if (detectionCallback) detectionCallback(data)
+        if (detectionCallback) detectionCallback(data.codeResult.code, data.codeResult.format, result)
     })
 
+    // Return start/stop functions
     return {
         start: Quagga.start,
         stop: Quagga.stop
