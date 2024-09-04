@@ -1,0 +1,3 @@
+[submodule "supermarkets-barcodes-api-proxy"]
+	path = supermarkets-barcodes-api-proxy
+	url = https://github.com/PortiESP/supermarkets-barcodes-api-proxy.git
