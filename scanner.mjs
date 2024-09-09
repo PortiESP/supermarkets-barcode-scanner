@@ -1,5 +1,4 @@
 import Quagga from 'quagga' // ES6
-import { queryBarcode } from './supermarkets-barcodes-api-proxy/modules/proxy'
 
 let lastDetectionTimestamp = 0
 
