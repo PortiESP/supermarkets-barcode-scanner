@@ -14,20 +14,19 @@ This tool allows a programmer to implement a barcode scanner in his project
 
 ```js
 // Import module
-import { setupScanner } from '../barcode-scanner/scanner.mjs'
+import { setupScanner } from './supermarkets-barcode-scanner/scanner.mjs'
 ```
 
 ```js
 // Setup
 const options = {
     detectionOptions: {
-        fetchBarcode: true,         // If set to `true` the scanner will fetch the API for the product of the barcode. If set to `false`, the scanner will just read and return the code (no queries are made)
         debounce: 1000              // Time (in ms) between a new read can be made
     },       
     container: "#container",        // CSS selector of the container where the captured image will be displayed
     errorCallback: function (){},   // Function being called in case the setup fails
     readyCallback: function (){},   // Function being called in case the setup succeeds (recommend setup a flag here to prevent the `.start()` calls to be made before the setup)
-    detectionCallback: function(code, format, result){},    // Function being called after a detection (if the `fetchBarcode` flag is enabled, the callback will be made after the server responds with the product)
+    detectionCallback: function(code, format){},    // Function being called after a detection is made
 }
 
 const scanner = setupScanner(options)
@@ -38,7 +37,6 @@ const scanner = setupScanner(options)
 > **Parameters**
 > - `code` : The scanner barcode numbers
 > - `format` : The format of the barcode: E.G.: "ean_13", "upc", etc.
-> - `result` : The product data returned from the API
 
 
 ```js
@@ -101,7 +99,6 @@ const detectionCallback = (code, format, result) => {
     console.log(code, format, result)
 }
 const detectionOptions = {
-    fetchBarcode: true,
     debounce: 1000
 }
 const container = "#camera"

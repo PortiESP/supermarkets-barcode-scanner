@@ -64,12 +64,8 @@ export function setupScanner({ container, errorCallback, readyCallback, detectio
             lastDetectionTimestamp = now
         }
 
-        // Fetch the barcode from the API (if enabled)
-        let result = undefined
-        if (fetchBarcode) result = await queryBarcode(data.codeResult.code, data.codeResult.format)
-
         // Custom callback
-        if (detectionCallback) detectionCallback(data.codeResult.code, data.codeResult.format, result)
+        if (detectionCallback) detectionCallback(data.codeResult.code, data.codeResult.format)
     })
 
     // Return start/stop functions
