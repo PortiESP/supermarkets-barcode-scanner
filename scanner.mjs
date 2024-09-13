@@ -51,7 +51,7 @@ export function setupScanner({ container, errorCallback, readyCallback, detectio
     })
 
     // Setup the detection callback
-    const { fetchBarcode, debounce } = detectionOptions
+    const { debounce } = detectionOptions
     Quagga.onDetected(async data => {
         // Prevent multiple calls to the callback for the same code
         if (debounce) {
